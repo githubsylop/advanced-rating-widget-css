@@ -5,74 +5,74 @@
 body {
   font-family: Poppins;
   background-color: #333;
-  font-size: 16px;
+  font-size: 1rem;
 }
-
 .card {
   background-color: #F8F8F8;
-  padding: 84px;
-  border-radius: 23px;
+  padding: 3rem;
+  border-radius: 1rem;
 }
 
-.title {
-  font-size: 34px;
-  font-family: Merriweather;
-  flex-grow: 1;
-}
-
-.average-rating {
-  font-size: 26px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.average-rating-section {
-  font-weight: 500;
-  font-size: 14px;
-  padding: 17px;
+.avrage-rating-section {
+  font-size: .8em;
+  padding: 2rem;
   background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 7px 20px 0 rgba(115, 116, 156, .08);
+  border-radius: .7em;
+  box-shadow: 0 7px 20px 0 rgba(115,116,156,.08);
   text-align: center;
   min-width: 150px;
 }
+.avrage-rating {
+  font-size: 1.5em;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:8px;
+  text-align: center;
+  margin-bottom: 1em;
+} 
 
+.title {
+  font-size:2rem;
+  font-family: Meriweather;
+}
 .star-icon {
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
+}
+ .avrage-rating-section .star-icon {
+  width: 44px;
+  height: 44px;
 }
 
-.average-rating-section .star-icon {
-  width: 46px;
-  height: 46px;
-}
-
-.star-icon .icon-path {
+.star-icon  .icon-path {
   fill: #FFD66C;
   stroke: #EFB153;
+  stroke-width: .2rem;
 }
 
 .header {
   display: flex;
-  align-items: center;
-  gap: 80px;
-  margin-bottom: 56px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .search-bar {
   display: flex;
+  /* justify-content: flex-start; */
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 1rem;
 }
 
 .search-input-icon {
+
   position: absolute;
   height: 48px;
   padding: 16px;
   pointer-events: none;
+  border-bottom-left-radius: 10px;
 }
 
 .search-input {
@@ -82,10 +82,25 @@ body {
   font-weight: 500;
   font-size: inherit;
   padding-left: calc(10px + 16px + 16px);
-  border: none;
-  width: 100%;
+ /* border-top-left-radius: 0;
+ border-bottom-left-radius: 0; */
+ /* border-left: none; */
+ border: none;
+ width: 100%;
 }
+.review-section {
 
+}
+.review-title {
+  margin-bottom: 16px;  
+}
+.review-row {
+  margin-top: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+}
 .review-rows {
   display: grid;
   grid-template-columns: auto auto 1fr auto;
@@ -95,61 +110,60 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   margin-top: 16px;
+  margin-bottom: 10px;
 }
-
-.review-section {
-  margin-bottom: 56px;
-}
-
 .review-number {
   font-weight: bold;
   text-align: end;
-  justify-self: flex-end;
+  justify-self: end;
 }
 
 .review-bar {
-  --border-width: 1px;
-  position: relative;
   flex-grow: 1;
-  background-color: #EEEEEE;
-  border: 1px solid #C9C9C9;
-  height: 10px;
+  position: relative;
+  padding: .5em;
   border-radius: 100px;
+  
+
+
 }
 
 .review-bar::after {
   content: "";
   position: absolute;
-  top: calc(-1 * var(--border-width));
-  bottom: calc(-1 * var(--border-width));
-  left: calc(-1 * var(--border-width));
-  right: calc(-1 * var(--border-width));
-  width: calc(2 * var(--border-width) + var(--width));
-  border: 1px solid #EFB153;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--width,50%);
   background-color: #FFD66C;
+  border-color: #EFb153;
   border-radius: 100px;
+  transition: all 500ms ease-out;
+}
+.review-bar {
+  background-color: #EEEEEE;
+
+  border: 1px solid #C9C9C9;
 }
 
-.review-bar.empty::after {
-  content: none;
+.review-count {
+
 }
 
 .review-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0rem;
 }
 
 .review-btn {
-  background-color: hsl(238, 49%, 19%);
+  background-color: #191B4A;
   color: white;
   border-radius: 100px;
-  padding: 16px 24px;
+  padding: .6rem 1.7rem;
   font-size: inherit;
   font-family: inherit;
   cursor: pointer;
-  border: none;
-  outline-color: hsl(238, 49%, 79%);
 }
 
 .review-btn:hover {
-  background-color: hsl(238, 49%, 29%);
+  background-color:hsl(238,49%,29%);
 }

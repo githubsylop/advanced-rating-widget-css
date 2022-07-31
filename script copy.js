@@ -8,63 +8,46 @@ const REVIEWS = {
   5: 120,
   4: 40,
   3: 20,
-  2: 20,
-  1: 20,
+  2: 0,
+  1: 0,
 }
 
-const totalReviews = Object.values(REVIEWS).reduce((sum,value)=> {
-    return sum +value
-},0)
+const totalReviews = Object.values(REVIEWS).reduce((sum, value) => {
+  return sum + value
+}, 0)
+const averageReview =
+  Object.entries(REVIEWS).reduce((sum, [value, quantity]) => {
+    return sum + value * quantity
+  }, 0) / totalReviews
 
-const averageReview=  totalReviews === 0 ? 0: Object.entries(REVIEWS).reduce((sum,[value,quantity]  )=> {
-        return sum+value*quantity
-},0)/totalReviews
+averageReviewElem.dataset.endValue = Math.round(averageReview * 10) / 10
+averageReviewElem.textContent = 0
 
-console.log(totalReviews)
-
-Object.entries(REVIEWS).sort(([a],[b])=>b-a).forEach(([value,quantity])=> {
-  const reviewNumber = document.createElement("div")
-  reviewNumber.textContent = value
-  reviewNumber.classList.add("review-number")
-  reviewRowsContainer.append(reviewNumber)
-  const starIconWrapper = document.createElement("div")
-  starIconWrapper.innerHTML = starIcon
-  reviewRowsContainer.append(starIconWrapper)
-  const reviewBar = document.createElement("div")
-  reviewBar.dataset.endValue = (quantity / totalReviews) * 100
-  reviewBar.classList.add("review-bar")
-  reviewBar.classList.toggle("empty", quantity === 0)
-  reviewRowsContainer.append(reviewBar)
-  const reviewCount = document.createElement("div")
-  reviewCount.dataset.endValue = quantity
-  reviewCount.textContent = 0
-  reviewCount.classList.add("review-count")
-  reviewRowsContainer.append(reviewCount)
-})
-
-averageReviewElem.textContent=Math.round(averageReview * 10 )/10
-
-// reviewRowsContainer.querySelectorAll('.review-bar').forEach((bar,i) => {
-//   const countElem = bar.nextElementSibling
-//   countElem.textContent= 1
-// })
-
-
-function update (time) {
-  const updateElement  = document.querySelectorAll("[data-end-value]")
-  updateElement.forEach((elem)=> {
-    const currentValue = elem.dataset.currentValue
-    const endValue = elem.dataset.endValue
+Object.entries(REVIEWS)
+  .sort(([a], [b]) => b - a)
+  .forEach(([value, quantity]) => {
+    const reviewNumber = document.createElement("div")
+    reviewNumber.textContent = value
+    reviewNumber.classList.add("review-number")
+    reviewRowsContainer.append(reviewNumber)
+    const starIconWrapper = document.createElement("div")
+    starIconWrapper.innerHTML = starIcon
+    reviewRowsContainer.append(starIconWrapper)
+    const reviewBar = document.createElement("div")
+    reviewBar.dataset.endValue = (quantity / totalReviews) * 100
+    reviewBar.classList.add("review-bar")
+    reviewBar.classList.toggle("empty", quantity === 0)
+    reviewRowsContainer.append(reviewBar)
+    const reviewCount = document.createElement("div")
+    reviewCount.dataset.endValue = quantity
+    reviewCount.textContent = 0
+    reviewCount.classList.add("review-count")
+    reviewRowsContainer.append(reviewCount)
   })
-  requestAnimationFrame(update)
-}
-
-requestAnimationFrame(update)
 
 let timeOffset
 const DURATION = 500
 function update(time) {
-  console.log(time)
   if (timeOffset != null) {
     const timeElapsed = time - timeOffset
     const newAverage = getNewValue(
